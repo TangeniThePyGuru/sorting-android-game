@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class AppInterface extends GridLayout {
@@ -42,12 +40,10 @@ public class AppInterface extends GridLayout {
             numbers[i].setTextSize(13);
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-//            if (i > 0) params.addRule(RelativeLayout.BELOW, numbers[i-1].getId());
             params.width = LayoutParams.MATCH_PARENT;
             params.height = screenHeight/15;
             params.rowSpec = GridLayout.spec(i, 1);
             params.columnSpec = GridLayout.spec(1, 1);
-//            params.topMargin = 1;
             params.setMargins(10,5,10,5);
             numbers[i].setLayoutParams(params);
             addView(numbers[i]);
@@ -62,7 +58,6 @@ public class AppInterface extends GridLayout {
         message.setText("45 swaps left");
 
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-//            if (i > 0) params.addRule(RelativeLayout.BELOW, numbers[i-1].getId());
         params.width = LayoutParams.MATCH_PARENT;
         params.height = screenHeight/10;
         params.rowSpec = GridLayout.spec(i, 1);
@@ -77,10 +72,18 @@ public class AppInterface extends GridLayout {
 
     }
 
-    public void showCurrent(int[] current)
+    public void showCurrent(int[] current, int windowLocation, String message)
     {
-        for (int i = 0; i < SIZE; i++)
-            numbers[i].setText(current[i]+"");
+        for (int i = 0; i < SIZE; i++) {
+            numbers[i].setText(current[i] + "");
+
+            // color code the window
+            if (i == windowLocation || i == windowLocation + 1)
+                numbers[i].setBackgroundColor(Color.YELLOW);
+        }
+
+        // set the current message for the game
+        this.message.setText(message);
     }
 
     public void stop()
