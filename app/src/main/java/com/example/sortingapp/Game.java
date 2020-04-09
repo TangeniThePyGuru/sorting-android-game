@@ -6,13 +6,11 @@ import java.util.Random;
 public class Game {
 
     private final int SIZE = 10;
-
     private int[] solution;
-
     private Random random;
-
     private int[] problem;
-
+    private int numberOfSwaps;
+    private int windowLocation;
 
     public Game (){
 
@@ -24,6 +22,49 @@ public class Game {
         generate_problem();
         sort_solution();
     }
+
+    public void move_window(){
+        // move the current
+        if (windowLocation < problem.length)
+            windowLocation ++;
+        else
+            windowLocation = 0;
+    }
+
+    public int[] getArray(){
+        // get the current array
+        return this.getProblem();
+    }
+
+    public void swap_window(){
+
+        // swap the two locations
+        int temp = problem[windowLocation];
+        problem[windowLocation] = problem[windowLocation+1];
+        problem[windowLocation+1] = temp;
+
+        // increment the number of swaps
+        if (numberOfSwaps < 45)
+            numberOfSwaps++;
+    }
+
+    public int getWindowLocation(){
+        // get the current window location
+        return windowLocation;
+    }
+
+    public String getMessage(){
+        // get a message on the status of the
+        return numberOfSwaps <= 45 ? "Won the game!": "Lost the game!";
+    }
+
+//    public void gameOver(){
+//        if (numberOfSwaps > 45)
+//
+//        else
+//
+//
+//    }
 
     private void generate_problem(){
         // no duplicates should
@@ -78,5 +119,4 @@ public class Game {
 
         return test;
     }
-
 }
