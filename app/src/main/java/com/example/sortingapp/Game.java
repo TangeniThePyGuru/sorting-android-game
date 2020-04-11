@@ -9,8 +9,9 @@ public class Game {
     private int[] solution;
     private Random random;
     private int[] problem;
-    private int numberOfSwaps;
-    private int windowLocation;
+    private int numberOfSwaps = 0;
+    private int windowLocation = 0;
+    private boolean gameOver = false;
 
     public Game (){
 
@@ -25,10 +26,11 @@ public class Game {
 
     public void move_window(){
         // move the current
-        if (windowLocation < problem.length)
+        if (windowLocation <= SIZE - 2)
             windowLocation ++;
-        else
+        else {
             windowLocation = 0;
+        }
     }
 
     public int[] getArray(){
@@ -46,6 +48,9 @@ public class Game {
         // increment the number of swaps
         if (numberOfSwaps < 45)
             numberOfSwaps++;
+        else
+            gameOver = true;
+
     }
 
     public int getWindowLocation(){
@@ -55,16 +60,12 @@ public class Game {
 
     public String getMessage(){
         // get a message on the status of the
-        return numberOfSwaps <= 45 ? "Won the game!": "Lost the game!";
+        if (gameOver){
+            if (numberOfSwaps < 45) return "Won the game!";
+            else return "Lost the game!";
+        }
+        return (45 - numberOfSwaps) + " swaps left";
     }
-
-//    public void gameOver(){
-//        if (numberOfSwaps > 45)
-//
-//        else
-//
-//
-//    }
 
     private void generate_problem(){
         // no duplicates should
