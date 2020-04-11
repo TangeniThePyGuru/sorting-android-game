@@ -46,10 +46,15 @@ public class Game {
         problem[windowLocation+1] = temp;
 
         // increment the number of swaps
-        if (numberOfSwaps < 45)
-            numberOfSwaps++;
-        else
-            gameOver = true;
+        if (!isArraySorted()){
+            if (numberOfSwaps < 45)
+                numberOfSwaps++;
+            else
+                gameOver = true;
+        }
+        else {
+
+        }
 
     }
 
@@ -61,7 +66,7 @@ public class Game {
     public String getMessage(){
         // get a message on the status of the
         if (gameOver){
-            if (numberOfSwaps < 45) return "Won the game!";
+            if (numberOfSwaps < 45) return "Won @ " + numberOfSwaps + " swaps!";
             else return "Lost the game!";
         }
         return (45 - numberOfSwaps) + " swaps left";
@@ -119,5 +124,30 @@ public class Game {
         }
 
         return test;
+    }
+
+    // check if game is over
+    public boolean isGameOver(){
+        if (numberOfSwaps < 45){
+            return false;
+        }
+
+        return true;
+    }
+
+    // checks if the array is sorted.
+    public boolean isArraySorted(){
+
+        boolean status = false;
+
+        for (int i = 0; i < problem.length; i++){
+            if (problem[i] == solution[i]) status = true;
+            else {
+                status = false;
+                break;
+            }
+        }
+
+        return status;
     }
 }

@@ -66,29 +66,36 @@ public class AppInterface extends GridLayout {
         params.setMargins(10,10,10,20);
         message.setLayoutParams(params);
         addView(message);
-
-
-
-
     }
 
     public void showCurrent(int[] current, int windowLocation, String message)
     {
         for (int i = 0; i < SIZE; i++) {
+            // fill the gui with updated numbers
             numbers[i].setText(current[i] + "");
 
-            // color code the window
-            if (i == windowLocation || i == windowLocation + 1)
-                numbers[i].setBackgroundColor(Color.YELLOW);
+            // color code the current window
+            if (i == windowLocation && windowLocation <= SIZE-2) {
+                numbers[windowLocation].setBackgroundColor(Color.YELLOW);
+                numbers[windowLocation+1].setBackgroundColor(Color.YELLOW);
+            }
+
+            // set the previous window's color to default
+            if (i == windowLocation - 1) {
+                numbers[i].setBackgroundColor(Color.parseColor("#009900"));
+                numbers[windowLocation].setBackgroundColor(Color.parseColor("#009900"));
+            }
         }
 
         // set the current message for the game
         this.message.setText(message);
     }
 
-    public void stop()
+    public void stop(String message)
     {
-        for (int i = 0; i < SIZE; i++)
+        for (int i = 0; i < SIZE; i++) {
             numbers[i].setBackgroundColor(Color.parseColor("#990000"));
+            this.message.setText(message);
+        }
     }
 }
