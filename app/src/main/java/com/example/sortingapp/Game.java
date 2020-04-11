@@ -49,11 +49,6 @@ public class Game {
         if (!isArraySorted()){
             if (numberOfSwaps < 45)
                 numberOfSwaps++;
-            else
-                gameOver = true;
-        }
-        else {
-
         }
 
     }
@@ -65,7 +60,7 @@ public class Game {
 
     public String getMessage(){
         // get a message on the status of the
-        if (gameOver){
+        if (isGameOver()){
             if (numberOfSwaps < 45) return "Won @ " + numberOfSwaps + " swaps!";
             else return "Lost the game!";
         }
